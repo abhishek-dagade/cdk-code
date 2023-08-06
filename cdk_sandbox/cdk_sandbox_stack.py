@@ -69,14 +69,14 @@ class kols3stack(Stack):
                 )]
         )
 
-        cfn_infra_role_trust_policy_document = iam.PolicyDocument(
+        s3_cross_accont_trust_relationship = iam.PolicyDocument(
             statements=[
               iam.PolicyStatement(
                 effect=iam.Effect.ALLOW,               
                 actions=[
                   "sts:AssumeRole"
                 ],                
-                principals=[iam.ServicePrincipal("ec2.amazonaws.com")],
+                principals=[iam.ServicePrincipal("lambda.amazonaws.com")],
               ),
               iam.PolicyStatement(
                 effect=iam.Effect.ALLOW,               
@@ -84,12 +84,12 @@ class kols3stack(Stack):
                   "sts:AssumeRole",            
                   "sts:TagSession"
                 ],
-                principals=[iam.ServicePrincipal("ec2.amazonaws.com")]
+                principals=[iam.ServicePrincipal("lambda.amazonaws.com")]
               )
             ]
         )
 
-        cfn_infra_role = iam.CfnRole(self, "PlmInfraRole",
+        s3_cross_account_access = iam.CfnRole(self, "PlmInfraRole",
             assume_role_policy_document=cfn_infra_role_trust_policy_document,
             role_name="s3_cross_account_access",
             description="role infra user",
