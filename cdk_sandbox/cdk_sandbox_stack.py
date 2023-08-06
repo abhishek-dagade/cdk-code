@@ -47,8 +47,8 @@ class kols3stack(Stack):
             self, "kol-raw-image-mapping",
             bucket_name=image_mapping_bucket_name,
             #bucket_name="test-889977",
-            #public_access_block_configuration=public_access_block_configuration_property,
-            #bucket_encryption=bucket_encryption_property
+            public_access_block_configuration=public_access_block_configuration_property,
+            bucket_encryption=bucket_encryption_property
         )
 
         s3_cross_account_access = iam.PolicyDocument(
